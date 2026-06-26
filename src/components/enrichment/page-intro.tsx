@@ -1,11 +1,28 @@
+import { ExternalLink } from 'lucide-react';
+
 /**
  * "Bulk List Enrichment" heading + Guide link-badge + description paragraph.
- * STUB — built in a later step.
  */
 export function PageIntro() {
   return (
-    <section data-slot="page-intro">
-      {/* TODO: title, Guide badge, description */}
+    <section className="rounded-xl border border-border bg-card p-4 sm:p-6">
+      <div className="flex flex-wrap items-center gap-2.5">
+        <h1 className="text-lg font-semibold text-foreground sm:text-xl">
+          Bulk List Enrichment
+        </h1>
+        <a
+          href="#"
+          className="inline-flex h-6 items-center gap-1 rounded-md bg-blue-500/15 px-2 text-xs font-medium text-blue-300 transition-colors hover:bg-blue-500/25"
+        >
+          Guide
+          <ExternalLink className="size-3" />
+        </a>
+      </div>
+      <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+        {
+          "Upload a CSV and we'll detect emails, B2B profile URLs with /in/, company domains, and more. Pick one or more enrichments, review the credit estimate, and run them in parallel. You only pay for rows with results."
+        }
+      </p>
     </section>
   );
 }

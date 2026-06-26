@@ -1,4 +1,4 @@
-import { ShoppingCart, KeyRound } from 'lucide-react';
+import { ShoppingCart, KeyRound, Settings } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { SidebarTrigger } from '@/components/ui/sidebar';
@@ -7,42 +7,55 @@ import { CreditsGauge } from './credits-gauge';
 import { CommandSearch } from './command-search';
 
 /**
- * Top bar: sidebar toggle · credits meter · Add credits · spacer · command search · API Keys.
+ * Top bar.
+ * - Mobile (<lg): sidebar toggle + settings shortcut only.
+ * - Desktop (lg+): toggle · credits meter · Add credits · spacer · search · API Keys.
  */
 export function AppHeader() {
   return (
-    <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b border-border bg-background px-4">
-      <SidebarTrigger className="size-8 text-muted-foreground hover:text-foreground" />
+    <header className="sticky top-0 z-20 flex h-14 items-center gap-1.5 border-b border-border bg-background px-3 sm:gap-2 sm:px-4">
+      <SidebarTrigger className="size-8 shrink-0 text-muted-foreground hover:text-foreground" />
 
-      <Separator orientation="vertical" className="mx-1 h-5!" />
+      {/* Mobile-only settings shortcut */}
+      <Button
+        variant="ghost"
+        size="icon"
+        className="size-8 shrink-0 text-muted-foreground hover:text-foreground lg:hidden"
+      >
+        <Settings className="size-[18px]" />
+        <span className="sr-only">Settings</span>
+      </Button>
 
-      {/* Credits meter */}
-      <div className="flex items-center gap-2">
-        <CreditsGauge />
-        <div className="flex flex-col leading-none">
-          <span className="text-sm font-semibold tabular-nums text-foreground">
-            16,365
-          </span>
-          <span className="mt-0.5 text-[10px] font-medium tracking-wide text-muted-foreground uppercase">
-            Credits left
-          </span>
+      {/* Desktop cluster */}
+      <div className="hidden flex-1 items-center gap-2 lg:flex">
+        <Separator orientation="vertical" className="mx-1 h-5!" />
+
+        <div className="flex items-center gap-2">
+          <CreditsGauge />
+          <div className="flex flex-col leading-none">
+            <span className="text-sm font-semibold tabular-nums text-foreground">
+              16,365
+            </span>
+            <span className="mt-0.5 text-[10px] font-medium tracking-wide text-muted-foreground uppercase">
+              Credits left
+            </span>
+          </div>
         </div>
+
+        <Button className="ml-2 h-9 gap-1.5 rounded-lg px-3 hover:bg-primary/90">
+          <ShoppingCart className="size-4" />
+          Add credits
+        </Button>
+
+        <div className="flex-1" />
+
+        <CommandSearch />
+
+        <Button className="h-9 gap-1.5 rounded-lg px-3 hover:bg-primary/90">
+          <KeyRound className="size-4" />
+          API Keys
+        </Button>
       </div>
-
-      <Button className="ml-2 h-9 gap-1.5 rounded-lg px-3 hover:bg-primary/90">
-        <ShoppingCart className="size-4" />
-        Add credits
-      </Button>
-
-      <div className="flex-1" />
-
-      {/* Right cluster */}
-      <CommandSearch />
-
-      <Button className="h-9 gap-1.5 rounded-lg px-3 hover:bg-primary/90">
-        <KeyRound className="size-4" />
-        API Keys
-      </Button>
     </header>
   );
 }
