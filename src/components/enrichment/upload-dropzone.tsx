@@ -64,7 +64,7 @@ export function UploadDropzone() {
         <div className="absolute size-[17rem] rounded-full border border-border/40" />
         <div className="absolute size-[24rem] rounded-full border border-border/25" />
         <div className="absolute size-[32rem] rounded-full border border-border/15" />
-        <div className="absolute size-[20rem] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.10),transparent_65%)]" />
+        <div className="absolute size-[20rem] rounded-full bg-[radial-gradient(circle,rgba(250,250,250,0.05),transparent_70%)]" />
       </div>
 
       {/* File + upload icon */}
