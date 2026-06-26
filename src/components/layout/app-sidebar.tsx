@@ -87,7 +87,7 @@ export function AppSidebar() {
           <LogoMark className="size-[26px] rounded-md" />
           <div className="grid min-w-0 flex-1 gap-0.5 text-left leading-tight">
             <span className="truncate text-sm font-medium text-sidebar-accent-foreground">
-              Kaveotech
+              Northwind
             </span>
             <span className="truncate text-[11px] leading-4 font-normal text-sidebar-foreground/70">
               Admin
@@ -206,7 +206,7 @@ export function AppSidebar() {
               Andrew Brower
             </span>
             <span className="truncate text-[11px] text-sidebar-foreground/70">
-              andrew.brower@kaveotech.com
+              contact@andrewbrower.dev
             </span>
           </div>
           <ChevronsUpDown className="size-4 shrink-0 text-sidebar-foreground/60" />

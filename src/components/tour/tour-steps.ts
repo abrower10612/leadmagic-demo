@@ -22,7 +22,7 @@ export const tourSteps: DriveStep[] = [
     popover: {
       title: 'Your file at a glance',
       description:
-        'We swapped the dominant spreadsheet for a compact summary: the columns we detected and how much of each is filled. Peek at the raw rows anytime with Preview rows.',
+        'I swapped the dominant spreadsheet for a compact summary: the columns I detected and how much of each is filled. Peek at the raw rows anytime with Preview rows.',
       side: 'bottom',
       align: 'start',
     },
@@ -32,7 +32,7 @@ export const tourSteps: DriveStep[] = [
     popover: {
       title: 'Recipes: the new fast path',
       description:
-        'Brand new here. Start from a recipe in one click (your recent picks, your saved sets, or our starters), or hit Smart select for the recommended set for this file.',
+        'Brand new here. Start from a recipe in one click (your recent picks, your saved sets, or my starters), or hit Smart select for the recommended set for this file.',
       side: 'bottom',
       align: 'start',
     },

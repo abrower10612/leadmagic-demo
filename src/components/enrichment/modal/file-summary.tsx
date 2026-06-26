@@ -31,7 +31,7 @@ export function FileSummary({
   return (
     <div
       data-tour="modal-file"
-      className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-border px-6 py-3"
+      className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-border px-4 py-3 sm:px-6"
     >
       <div className="flex items-center gap-1.5 text-sm text-foreground">
         <FileText className="size-4 shrink-0 text-muted-foreground" />

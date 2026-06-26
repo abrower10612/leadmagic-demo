@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 
 /**
- * Kaveotech brand mark: teal→green gradient rounded square with a white glyph.
+ * Northwind brand mark: teal→green gradient rounded square with a white glyph.
  */
 export function LogoMark({ className }: { className?: string }) {
   return (
@@ -18,7 +18,7 @@ export function LogoMark({ className }: { className?: string }) {
         aria-hidden="true"
       >
         <path
-          d="M7.5 4.5v15M7.5 12l8-7.5M7.5 12l8 7.5"
+          d="M6.5 18.5V5.5l11 13V5.5"
           stroke="currentColor"
           strokeWidth="2.4"
           strokeLinecap="round"

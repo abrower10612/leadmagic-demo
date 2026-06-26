@@ -59,7 +59,7 @@ export function EnrichmentPanel({
   }
 
   return (
-    <section data-tour="modal-list" className="px-6 pt-5 pb-6">
+    <section data-tour="modal-list" className="px-4 pt-5 pb-6 sm:px-6">
       <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
         <div>
           <h3 className="text-sm font-semibold text-foreground">

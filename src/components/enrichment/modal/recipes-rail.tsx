@@ -28,7 +28,7 @@ export function RecipesRail({
     r.enrichmentIds.every((id) => selected.has(id));
 
   return (
-    <section data-tour="modal-recipes" className="px-6 pt-5 pb-5">
+    <section data-tour="modal-recipes" className="px-4 pt-5 pb-5 sm:px-6">
       <div className="mb-3 flex items-end justify-between gap-3">
         <div>
           <h3 className="text-sm font-semibold text-foreground">

@@ -47,17 +47,18 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
   return (
     <div className="flex h-full min-h-0 flex-col">
       {/* Header */}
-      <div className="flex shrink-0 items-center justify-between gap-4 border-b border-border px-6 py-4">
-        <div>
-          <DialogTitle className="text-xl font-semibold tracking-tight">
+      <div className="flex shrink-0 items-center justify-between gap-3 border-b border-border px-4 py-3 sm:px-6 sm:py-4">
+        <div className="min-w-0">
+          <DialogTitle className="truncate text-lg font-semibold tracking-tight sm:text-xl">
             Submit new enrichment
           </DialogTitle>
           <DialogDescription className="sr-only">
             Review your file and choose which enrichments to run.
           </DialogDescription>
         </div>
-        <label className="flex shrink-0 cursor-pointer items-center gap-2.5 text-sm text-muted-foreground">
-          Use first row as header
+        <label className="flex shrink-0 cursor-pointer items-center gap-2 text-sm text-muted-foreground sm:gap-2.5">
+          <span className="hidden sm:inline">Use first row as header</span>
+          <span className="sm:hidden">Header row</span>
           <Switch checked={useHeader} onCheckedChange={setUseHeader} />
         </label>
       </div>
@@ -85,7 +86,7 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
           onApply={applyRecipe}
           onSmartSelect={sel.smartSelect}
         />
-        <div className="mx-6 border-t border-border" />
+        <div className="mx-4 border-t border-border sm:mx-6" />
         <EnrichmentPanel
           detection={detection}
           rowCount={rowCount}
@@ -98,7 +99,7 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
       {/* Footer */}
       <div
         data-tour="modal-footer"
-        className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t border-border px-6 py-3"
+        className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t border-border px-4 py-3 sm:px-6"
       >
         <div className="flex items-center gap-1.5 text-sm">
           <Zap className="size-4 text-primary" />
@@ -111,7 +112,7 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
             {sel.estimate.usd.toFixed(2)}) · Growth plan $0.0125/credit
           </span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center justify-end gap-2">
           {sel.estimate.count > 0 &&
             (confirmClear ? (
               <>
@@ -149,7 +150,10 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
           <Button variant="outline" data-tour="modal-cancel" onClick={onClose}>
             Cancel
           </Button>
-          <Button disabled={sel.estimate.count === 0}>Start enrichment</Button>
+          <Button disabled={sel.estimate.count === 0}>
+            <span className="sm:hidden">Start</span>
+            <span className="hidden sm:inline">Start enrichment</span>
+          </Button>
         </div>
       </div>
     </div>
