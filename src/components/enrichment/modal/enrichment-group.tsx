@@ -27,7 +27,7 @@ export function EnrichmentGroup({
 
   return (
     <section>
-      <header className="sticky top-0 z-10 -mx-1 flex items-center justify-between gap-2 bg-popover px-1 py-1.5">
+      <header className="sticky top-0 z-10 -mx-1 flex items-center justify-between gap-2 bg-background px-1 py-1.5">
         <div className="flex items-center gap-1.5 text-xs font-medium tracking-wide text-muted-foreground uppercase">
           <group.icon className="size-3.5" />
           {group.label}

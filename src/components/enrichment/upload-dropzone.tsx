@@ -89,8 +89,8 @@ export function UploadDropzone() {
       <div className="relative z-10 mb-5">
         <div className="relative">
           <FileText
-            className="size-12 text-muted-foreground/70"
-            strokeWidth={1.25}
+            className="size-12 text-muted-foreground"
+            strokeWidth={1.5}
           />
           <span className="absolute -right-2.5 -bottom-1 flex size-7 items-center justify-center rounded-full bg-primary ring-4 ring-background">
             <ArrowUp className="size-4 text-primary-foreground" />

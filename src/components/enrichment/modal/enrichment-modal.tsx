@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { FileSpreadsheet, Zap } from 'lucide-react';
+import { FileText, Zap } from 'lucide-react';
 
 import {
   Dialog,
@@ -38,24 +38,34 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
 
   return (
     <div className="flex h-full min-h-0 flex-col">
-      {/* Header */}
-      <div className="flex items-start justify-between gap-4 border-b border-border px-4 py-3">
-        <div className="min-w-0">
-          <DialogTitle className="text-base font-semibold">
-            Submit new enrichment
-          </DialogTitle>
-          <DialogDescription className="sr-only">
-            Preview your CSV and choose which enrichments to run.
-          </DialogDescription>
-          <div className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
-            <FileSpreadsheet className="size-3.5 shrink-0" />
-            <span className="truncate">{csv.fileName}</span>
+      {/* Header band — toggle sits over the sheet, panel title over the panel */}
+      <div className="flex shrink-0 border-b border-border">
+        <div className="flex flex-1 items-center justify-between gap-4 border-r border-border px-5 py-4">
+          <div className="min-w-0">
+            <DialogTitle className="text-xl font-semibold tracking-tight">
+              Submit new enrichment
+            </DialogTitle>
+            <DialogDescription className="sr-only">
+              Preview your CSV and choose which enrichments to run.
+            </DialogDescription>
+            <div className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground">
+              <FileText className="size-3.5 shrink-0" />
+              <span className="truncate">{csv.fileName}</span>
+            </div>
           </div>
+          <label className="flex shrink-0 cursor-pointer items-center gap-2.5 text-sm text-muted-foreground">
+            Use first row as header
+            <Switch checked={useHeader} onCheckedChange={setUseHeader} />
+          </label>
         </div>
-        <label className="flex shrink-0 cursor-pointer items-center gap-2 text-xs text-muted-foreground">
-          Use first row as header
-          <Switch checked={useHeader} onCheckedChange={setUseHeader} />
-        </label>
+        <div className="flex w-[540px] shrink-0 items-center justify-between px-5 py-4">
+          <h2 className="text-base font-semibold text-foreground">
+            Choose enrichments
+          </h2>
+          <span className="text-xs text-muted-foreground">
+            {sel.estimate.count} selected
+          </span>
+        </div>
       </div>
 
       {/* Body: spreadsheet | enrichment panel */}
@@ -64,16 +74,7 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
           <CsvPreview csv={csv} useHeader={useHeader} />
         </div>
 
-        <aside className="flex w-[400px] shrink-0 flex-col">
-          <div className="flex items-center justify-between border-b border-border px-4 py-3">
-            <h2 className="text-sm font-semibold text-foreground">
-              Choose enrichments
-            </h2>
-            <span className="text-xs text-muted-foreground">
-              {sel.estimate.count} selected
-            </span>
-          </div>
-
+        <aside className="flex w-[540px] shrink-0 flex-col">
           <EnrichmentPanel
             detection={detection}
             rowCount={rowCount}
@@ -129,7 +130,7 @@ export function EnrichmentModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton={false}
-        className="flex h-[88vh] max-h-[820px] w-[calc(100%-2rem)] max-w-[1180px] flex-col gap-0 overflow-hidden p-0 sm:max-w-[1180px]"
+        className="flex h-[84vh] max-h-[900px] w-[92vw] max-w-[1680px] flex-col gap-0 overflow-hidden bg-background p-0 sm:max-w-[1680px]"
       >
         {csv && (
           <ModalContent
