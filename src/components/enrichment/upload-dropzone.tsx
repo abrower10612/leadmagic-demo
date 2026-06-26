@@ -52,7 +52,7 @@ export function UploadDropzone() {
         'relative flex min-h-[300px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl border px-5 py-10 text-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring sm:min-h-[330px] sm:px-6',
         dragging
           ? 'border-primary bg-primary/5'
-          : 'border-border bg-card hover:border-border/70'
+          : 'border-border/50 bg-card/80 hover:border-border/70'
       )}
     >
       {/* Radar rings + soft glow */}

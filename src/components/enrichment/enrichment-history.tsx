@@ -24,7 +24,7 @@ export function EnrichmentHistory() {
   }, [query]);
 
   return (
-    <section className="rounded-xl border border-border bg-card">
+    <section className="rounded-xl border border-border/50 bg-card/80">
       {/* Section header */}
       <div className="flex items-center justify-between gap-3 p-4 sm:p-5">
         <div>

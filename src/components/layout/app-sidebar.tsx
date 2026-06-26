@@ -1,11 +1,11 @@
 'use client';
 
 import {
-  LayoutGrid,
-  ListRestart,
+  LayoutDashboard,
+  FileOutput,
   MessageCircle,
-  Waypoints,
-  SquareTerminal,
+  Workflow,
+  Terminal,
   CreditCard,
   Settings,
   Radar,
@@ -15,6 +15,7 @@ import {
   ExternalLink,
   LifeBuoy,
   ChevronsUpDown,
+  TestTube,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -25,10 +26,8 @@ import {
   SidebarGroup,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
-  SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
 import {
@@ -47,70 +46,93 @@ interface NavItem {
 }
 
 const primaryNav: NavItem[] = [
-  { icon: LayoutGrid, label: 'Dashboard' },
-  { icon: ListRestart, label: 'List Enrichment', active: true },
+  { icon: LayoutDashboard, label: 'Dashboard' },
+  { icon: FileOutput, label: 'List Enrichment', active: true },
   { icon: MessageCircle, label: 'Chat', beta: true },
-  { icon: Waypoints, label: 'Integrations' },
-  { icon: SquareTerminal, label: 'API access' },
+  { icon: Workflow, label: 'Integrations' },
+  { icon: Terminal, label: 'API access' },
   { icon: CreditCard, label: 'Billing' },
   { icon: Settings, label: 'Settings' },
 ];
+
+const linkClass =
+  'group/link flex h-8 min-w-0 items-center gap-2 rounded-lg border border-transparent px-2 text-[13px] font-normal leading-none tracking-[-0.01em] text-sidebar-foreground/80 transition-colors duration-150 hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground data-[active=true]:bg-sidebar-accent/80 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground';
+
+const iconSpanClass =
+  'flex size-5 shrink-0 items-center justify-center text-sidebar-foreground/60 transition-colors group-hover/link:text-sidebar-accent-foreground group-data-[active=true]/link:text-sidebar-accent-foreground [&_svg]:size-3.5';
+
+function NavLink({ item }: { item: NavItem }) {
+  return (
+    <a href="#" data-active={item.active ? 'true' : undefined} className={linkClass}>
+      <span className={iconSpanClass}>
+        <item.icon />
+      </span>
+      <span className="min-w-0 flex-1 truncate text-left">{item.label}</span>
+      {item.beta && (
+        <span className="ml-auto flex h-4 items-center gap-1 rounded-full border border-success/25 bg-success/12 px-1.5 text-[9px] font-semibold tracking-wider text-success uppercase">
+          <TestTube className="size-2.5" />
+          Beta
+        </span>
+      )}
+    </a>
+  );
+}
 
 export function AppSidebar() {
   return (
     <Sidebar collapsible="offcanvas" className="border-sidebar-border">
       {/* Brand */}
-      <SidebarHeader className="h-14 flex-row items-center gap-2.5 px-3">
-        <LogoMark />
-        <div className="flex flex-col leading-none">
-          <span className="text-sm font-semibold text-sidebar-foreground">
-            Kaveotech
-          </span>
-          <span className="mt-1 text-xs text-muted-foreground">Admin</span>
+      <SidebarHeader className="h-12 flex-row items-center border-b border-sidebar-border px-1.5">
+        <div className="flex min-w-0 flex-1 items-center gap-2 px-2 py-1.5">
+          <LogoMark className="size-[26px] rounded-md" />
+          <div className="grid min-w-0 flex-1 gap-0.5 text-left leading-tight">
+            <span className="truncate text-sm font-medium text-sidebar-accent-foreground">
+              Kaveotech
+            </span>
+            <span className="truncate text-[11px] leading-4 font-normal text-sidebar-foreground/70">
+              Admin
+            </span>
+          </div>
         </div>
       </SidebarHeader>
 
-      <SidebarContent className="px-2 py-2">
+      <SidebarContent className="gap-2 px-1.5 py-1.5">
         {/* Primary navigation */}
-        <SidebarGroup className="p-0">
-          <SidebarMenu className="gap-1">
+        <SidebarGroup className="p-2">
+          <SidebarMenu className="gap-0.5">
             {primaryNav.map((item) => (
               <SidebarMenuItem key={item.label}>
-                <SidebarMenuButton
-                  isActive={item.active}
-                  className="h-9 gap-3 px-3 text-muted-foreground data-active:text-sidebar-foreground [&_svg]:size-[18px]"
-                >
-                  <item.icon />
-                  <span>{item.label}</span>
-                  {item.beta && (
-                    <span className="ml-auto rounded-md bg-success/10 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-success uppercase">
-                      Beta
-                    </span>
-                  )}
-                </SidebarMenuButton>
+                <NavLink item={item} />
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
         </SidebarGroup>
 
         {/* Grouped / collapsible navigation */}
-        <SidebarGroup className="mt-2 p-0">
-          <SidebarMenu className="gap-1">
+        <SidebarGroup className="p-2">
+          <SidebarMenu className="gap-0.5">
             <Collapsible defaultOpen className="group/collapsible">
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
-                  <SidebarMenuButton className="h-9 gap-3 px-3 text-muted-foreground [&_svg]:size-[18px]">
-                    <Radar />
-                    <span>Signals</span>
-                    <ChevronRight className="ml-auto size-4! transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                  </SidebarMenuButton>
+                  <button className={linkClass}>
+                    <span className={iconSpanClass}>
+                      <Radar />
+                    </span>
+                    <span className="min-w-0 flex-1 truncate text-left">
+                      Signals
+                    </span>
+                    <ChevronRight className="size-3.5 text-sidebar-foreground/60 transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                  </button>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
-                  <SidebarMenuSub className="mr-0 ml-[1.4rem] border-sidebar-border pr-0">
+                  <SidebarMenuSub className="mr-0 ml-[1.45rem] gap-0.5 border-sidebar-border pr-0">
                     <SidebarMenuSubItem>
-                      <SidebarMenuSubButton className="h-8 text-muted-foreground">
-                        <span>Local Leads Finder</span>
-                      </SidebarMenuSubButton>
+                      <a
+                        href="#"
+                        className="flex h-8 min-w-0 items-center rounded-lg px-2 text-[13px] font-normal tracking-[-0.01em] text-sidebar-foreground/80 transition-colors hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground"
+                      >
+                        <span className="truncate">Local Leads Finder</span>
+                      </a>
                     </SidebarMenuSubItem>
                   </SidebarMenuSub>
                 </CollapsibleContent>
@@ -120,18 +142,25 @@ export function AppSidebar() {
             <Collapsible className="group/collapsible">
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
-                  <SidebarMenuButton className="h-9 gap-3 px-3 text-muted-foreground [&_svg]:size-[18px]">
-                    <Building2 />
-                    <span>Companies</span>
-                    <ChevronRight className="ml-auto size-4! transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                  </SidebarMenuButton>
+                  <button className={linkClass}>
+                    <span className={iconSpanClass}>
+                      <Building2 />
+                    </span>
+                    <span className="min-w-0 flex-1 truncate text-left">
+                      Companies
+                    </span>
+                    <ChevronRight className="size-3.5 text-sidebar-foreground/60 transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                  </button>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
-                  <SidebarMenuSub className="mr-0 ml-[1.4rem] border-sidebar-border pr-0">
+                  <SidebarMenuSub className="mr-0 ml-[1.45rem] gap-0.5 border-sidebar-border pr-0">
                     <SidebarMenuSubItem>
-                      <SidebarMenuSubButton className="h-8 text-muted-foreground">
-                        <span>All Companies</span>
-                      </SidebarMenuSubButton>
+                      <a
+                        href="#"
+                        className="flex h-8 min-w-0 items-center rounded-lg px-2 text-[13px] font-normal tracking-[-0.01em] text-sidebar-foreground/80 transition-colors hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground"
+                      >
+                        <span className="truncate">All Companies</span>
+                      </a>
                     </SidebarMenuSubItem>
                   </SidebarMenuSub>
                 </CollapsibleContent>
@@ -142,41 +171,45 @@ export function AppSidebar() {
       </SidebarContent>
 
       {/* Footer: Docs, Support, user card */}
-      <SidebarFooter className="gap-1 p-2">
-        <SidebarMenu className="gap-1">
+      <SidebarFooter className="gap-0.5 border-t border-sidebar-border px-1.5 py-1.5">
+        <SidebarMenu className="gap-0.5">
           <SidebarMenuItem>
-            <SidebarMenuButton className="h-9 gap-3 px-3 text-muted-foreground [&_svg]:size-[18px]">
-              <BookOpen />
-              <span>Docs</span>
-              <ExternalLink className="ml-auto size-3.5! opacity-60" />
-            </SidebarMenuButton>
+            <a href="#" className={linkClass}>
+              <span className={iconSpanClass}>
+                <BookOpen />
+              </span>
+              <span className="min-w-0 flex-1 truncate text-left">Docs</span>
+              <ExternalLink className="size-3.5 text-sidebar-foreground/50" />
+            </a>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton className="h-9 gap-3 px-3 text-muted-foreground [&_svg]:size-[18px]">
-              <LifeBuoy />
-              <span>Support</span>
-            </SidebarMenuButton>
+            <a href="#" className={linkClass}>
+              <span className={iconSpanClass}>
+                <LifeBuoy />
+              </span>
+              <span className="min-w-0 flex-1 truncate text-left">Support</span>
+            </a>
           </SidebarMenuItem>
         </SidebarMenu>
 
         <button
           type="button"
-          className="mt-1 flex items-center gap-2.5 rounded-lg px-2 py-2 text-left transition-colors hover:bg-sidebar-accent"
+          className="mt-0.5 flex h-11 items-center gap-2 rounded-lg px-2 text-left transition-colors hover:bg-sidebar-accent/50"
         >
-          <Avatar className="size-8 rounded-lg">
-            <AvatarFallback className="rounded-lg bg-primary text-xs font-medium text-primary-foreground">
+          <Avatar className="size-7 rounded-md">
+            <AvatarFallback className="rounded-md bg-primary text-xs font-medium text-primary-foreground">
               A
             </AvatarFallback>
           </Avatar>
-          <div className="flex min-w-0 flex-col leading-none">
-            <span className="truncate text-sm font-medium text-sidebar-foreground">
+          <div className="grid min-w-0 flex-1 gap-0.5 leading-tight">
+            <span className="truncate text-[13px] font-medium text-sidebar-foreground">
               Andrew Brower
             </span>
-            <span className="mt-1 truncate text-xs text-muted-foreground">
+            <span className="truncate text-[11px] text-sidebar-foreground/70">
               andrew.brower@kaveotech.com
             </span>
           </div>
-          <ChevronsUpDown className="ml-auto size-4 shrink-0 text-muted-foreground" />
+          <ChevronsUpDown className="size-4 shrink-0 text-sidebar-foreground/60" />
         </button>
       </SidebarFooter>
     </Sidebar>

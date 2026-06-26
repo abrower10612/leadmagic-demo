@@ -6,10 +6,12 @@ import { EnrichmentHistory } from '@/components/enrichment/enrichment-history';
 export default function ListEnrichmentPage() {
   return (
     <AppShell>
-      <div className="flex flex-col gap-4 p-4 sm:gap-6 sm:p-6">
-        <PageIntro />
-        <UploadDropzone />
-        <EnrichmentHistory />
+      <div className="flex w-full min-w-0 flex-col gap-4">
+        <div className="flex min-h-0 flex-col gap-3">
+          <PageIntro />
+          <UploadDropzone />
+          <EnrichmentHistory />
+        </div>
       </div>
     </AppShell>
   );
