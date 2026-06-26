@@ -162,3 +162,85 @@
     transform: translateY(-2rem);
   }
 }
+
+/* Guided tour (driver.js) — themed to the dark/violet design system. */
+.driver-popover.lm-tour {
+  background-color: #18181b;
+  color: #fafafa;
+  border: 1px solid #323236;
+  border-radius: 0.75rem;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+  max-width: 320px;
+  padding: 1rem 1rem 0.85rem;
+  font-family:
+    var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+.driver-popover.lm-tour .driver-popover-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fafafa;
+}
+.driver-popover.lm-tour .driver-popover-description {
+  margin-top: 0.3rem;
+  font-size: 0.825rem;
+  line-height: 1.45;
+  color: #9f9fa9;
+}
+.driver-popover.lm-tour .driver-popover-progress-text {
+  font-size: 0.7rem;
+  color: #71717b;
+}
+.driver-popover.lm-tour .driver-popover-close-btn {
+  color: #9f9fa9;
+  transition: color 0.15s ease;
+}
+.driver-popover.lm-tour .driver-popover-close-btn:hover {
+  color: #fafafa;
+}
+.driver-popover.lm-tour .driver-popover-footer {
+  margin-top: 0.85rem;
+  gap: 0.5rem;
+}
+.driver-popover.lm-tour .driver-popover-navigation-btns button {
+  text-shadow: none;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.driver-popover.lm-tour .driver-popover-next-btn,
+.driver-popover.lm-tour .driver-popover-next-btn:hover {
+  background-color: #7c3aed;
+  color: #fafafa;
+  border: 1px solid transparent;
+}
+.driver-popover.lm-tour .driver-popover-next-btn:hover {
+  background-color: #6d28d9;
+}
+.driver-popover.lm-tour .driver-popover-prev-btn {
+  background-color: transparent;
+  color: #9f9fa9;
+  border: 1px solid #323236;
+}
+.driver-popover.lm-tour .driver-popover-prev-btn:hover {
+  background-color: #27272a;
+  color: #fafafa;
+}
+/* Arrow tints to match the popover surface. */
+.driver-popover.lm-tour .driver-popover-arrow-side-top {
+  border-top-color: #18181b;
+}
+.driver-popover.lm-tour .driver-popover-arrow-side-bottom {
+  border-bottom-color: #18181b;
+}
+.driver-popover.lm-tour .driver-popover-arrow-side-left {
+  border-left-color: #18181b;
+}
+.driver-popover.lm-tour .driver-popover-arrow-side-right {
+  border-right-color: #18181b;
+}

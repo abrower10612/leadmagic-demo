@@ -2,6 +2,7 @@ import { AppShell } from '@/components/layout/app-shell';
 import { PageIntro } from '@/components/enrichment/page-intro';
 import { UploadDropzone } from '@/components/enrichment/upload-dropzone';
 import { EnrichmentHistory } from '@/components/enrichment/enrichment-history';
+import { Tour } from '@/components/tour/tour';
 
 export default function ListEnrichmentPage() {
   return (
@@ -13,6 +14,7 @@ export default function ListEnrichmentPage() {
           <EnrichmentHistory />
         </div>
       </div>
+      <Tour />
     </AppShell>
   );
 }

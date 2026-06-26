@@ -46,6 +46,7 @@ export function UploadDropzone() {
       role="button"
       tabIndex={0}
       aria-label="Upload a CSV"
+      data-tour="dropzone"
       onClick={() => inputRef.current?.click()}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
