@@ -5,6 +5,13 @@ import { FileText, ArrowUp, Download, ExternalLink } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { parseCsv, type ParsedCsv } from '@/lib/csv';
+import { EnrichmentModal } from './modal/enrichment-modal';
+
+const SAMPLE_CSV = `first_name,last_name,company_domain,linkedin_url,email
+Jane,Smith,acme.com,https://www.linkedin.com/in/jane-smith,
+John,Doe,example.com,,john@example.com
+Maria,Garcia,startup.io,https://www.linkedin.com/in/maria-garcia,`;
 
 /**
  * The CSV drop target with the radar background, file/upload icon, copy,
@@ -17,14 +24,25 @@ import { cn } from '@/lib/utils';
 export function UploadDropzone() {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = React.useState(false);
+  const [csv, setCsv] = React.useState<ParsedCsv | null>(null);
+  const [open, setOpen] = React.useState(false);
 
-  function handleFiles(files: FileList | null) {
-    if (!files || files.length === 0) return;
-    // TODO (next step): open the enrichment config modal with files[0].
+  async function handleFiles(files: FileList | null) {
+    const file = files?.[0];
+    if (!file) return;
+    const text = await file.text();
+    setCsv(parseCsv(text, file.name));
+    setOpen(true);
+  }
+
+  function openSample() {
+    setCsv(parseCsv(SAMPLE_CSV, 'bulk-list-enrichment-sample.csv'));
+    setOpen(true);
   }
 
   return (
-    <section
+    <>
+      <section
       role="button"
       tabIndex={0}
       aria-label="Upload a CSV"
@@ -99,7 +117,7 @@ export function UploadDropzone() {
           className="h-9 gap-1.5"
           onClick={(e) => {
             e.stopPropagation();
-            inputRef.current?.click();
+            openSample();
           }}
         >
           <Download className="size-4" />
@@ -122,6 +140,9 @@ export function UploadDropzone() {
         className="hidden"
         onChange={(e) => handleFiles(e.target.files)}
       />
-    </section>
+      </section>
+
+      <EnrichmentModal csv={csv} open={open} onOpenChange={setOpen} />
+    </>
   );
 }

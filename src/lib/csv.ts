@@ -49,6 +49,18 @@ export function parseCsv(text: string, fileName = 'upload.csv'): ParsedCsv {
   return { headers, rows, rowCount: rows.length, fileName };
 }
 
+/** Spreadsheet column letter for a 0-based index (0 -> A, 26 -> AA). */
+export function columnLetter(index: number): string {
+  let s = '';
+  let i = index + 1;
+  while (i > 0) {
+    const r = (i - 1) % 26;
+    s = String.fromCharCode(65 + r) + s;
+    i = Math.floor((i - 1) / 26);
+  }
+  return s;
+}
+
 export interface DetectedInfo {
   header: string;
   index: number;
