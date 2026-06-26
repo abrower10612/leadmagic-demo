@@ -32,6 +32,28 @@ export function missingColumns(
   return best ?? [];
 }
 
+export interface Readiness {
+  ready: boolean;
+  missing: DetectedColumn[];
+  /** rows that have every needed input populated */
+  coveredRows: number;
+  pct: number;
+}
+
+/** Whether an enrichment can run on this file, plus input coverage. */
+export function inputReadiness(
+  e: Enrichment,
+  detection: ColumnDetection,
+  rowCount: number
+): Readiness {
+  if (!isReady(e, detection)) {
+    return { ready: false, missing: missingColumns(e, detection), coveredRows: 0, pct: 0 };
+  }
+  const alt = e.requires.find((g) => g.every((c) => detection[c]))!;
+  const coveredRows = Math.min(...alt.map((c) => detection[c]!.filled));
+  return { ready: true, missing: [], coveredRows, pct: rowCount ? coveredRows / rowCount : 0 };
+}
+
 export interface Estimate {
   count: number;
   credits: number;

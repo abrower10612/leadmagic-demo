@@ -13,6 +13,7 @@ import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { detectColumns, type ParsedCsv } from '@/lib/csv';
 import { CsvPreview } from './csv-preview';
+import { EnrichmentPanel } from './enrichment-panel';
 import { useEnrichmentSelection } from './use-enrichment-selection';
 
 function formatCredits(n: number): string {
@@ -73,10 +74,13 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
             </span>
           </div>
 
-          {/* Placeholder — recipes + list arrive in step 3/4 */}
-          <div className="flex min-h-0 flex-1 items-center justify-center overflow-auto p-6 text-center text-xs text-muted-foreground">
-            Enrichment recipes and options arrive in the next step.
-          </div>
+          <EnrichmentPanel
+            detection={detection}
+            rowCount={rowCount}
+            selected={sel.selected}
+            onToggle={sel.toggle}
+            onToggleGroup={sel.toggleGroup}
+          />
 
           {/* Footer: estimate + actions */}
           <div className="space-y-3 border-t border-border p-4">

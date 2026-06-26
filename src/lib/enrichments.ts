@@ -206,3 +206,11 @@ export const enrichments: Enrichment[] = [
 export const enrichmentById: Record<string, Enrichment> = Object.fromEntries(
   enrichments.map((e) => [e.id, e])
 );
+
+export const COLUMN_LABEL: Record<DetectedColumn, string> = {
+  email: 'email',
+  linkedin_url: 'LinkedIn URL',
+  company_domain: 'company domain',
+  first_name: 'first name',
+  last_name: 'last name',
+};
