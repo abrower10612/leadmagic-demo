@@ -12,7 +12,7 @@ export function PageIntro() {
         </h1>
         <a
           href="#"
-          className="inline-flex h-6 items-center gap-1 rounded-md bg-blue-500/15 px-2 text-xs font-medium text-blue-300 transition-colors hover:bg-blue-500/25"
+          className="inline-flex h-6 items-center gap-1 rounded-md bg-info/15 px-2 text-xs font-medium text-info transition-colors hover:bg-info/25"
         >
           Guide
           <ExternalLink className="size-3" />

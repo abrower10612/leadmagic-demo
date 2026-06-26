@@ -61,8 +61,8 @@ function Metric({
     <span
       className={cn(
         'tabular-nums',
-        tone === 'success' && 'text-emerald-400',
-        tone === 'danger' && 'text-red-400',
+        tone === 'success' && 'text-success',
+        tone === 'danger' && 'text-destructive',
         tone === 'default' && 'text-foreground'
       )}
     >
@@ -73,7 +73,7 @@ function Metric({
 
 function ProgressCell({ progress }: { progress: number }) {
   return (
-    <div className="flex items-center gap-1.5 text-emerald-400">
+    <div className="flex items-center gap-1.5 text-success">
       <CircleCheck className="size-4" />
       <span className="tabular-nums">{progress}%</span>
     </div>

@@ -2,9 +2,9 @@ import { cn } from '@/lib/utils';
 import type { EnrichmentStatus } from '@/lib/enrichment-data';
 
 const styles: Record<EnrichmentStatus, string> = {
-  completed: 'bg-emerald-500/10 text-emerald-400 ring-emerald-500/20',
-  processing: 'bg-blue-500/10 text-blue-400 ring-blue-500/20',
-  failed: 'bg-red-500/10 text-red-400 ring-red-500/20',
+  completed: 'bg-success/10 text-success ring-success/20',
+  processing: 'bg-info/10 text-info ring-info/20',
+  failed: 'bg-destructive/10 text-destructive ring-destructive/20',
   queued: 'bg-muted text-muted-foreground ring-border',
 };
 

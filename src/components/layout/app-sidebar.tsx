@@ -83,7 +83,7 @@ export function AppSidebar() {
                   <item.icon />
                   <span>{item.label}</span>
                   {item.beta && (
-                    <span className="ml-auto rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-emerald-400 uppercase">
+                    <span className="ml-auto rounded-md bg-success/10 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-success uppercase">
                       Beta
                     </span>
                   )}
