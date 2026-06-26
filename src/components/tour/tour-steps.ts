@@ -1,45 +1,60 @@
 import type { DriveStep } from 'driver.js';
 
 /**
- * Guided walkthrough steps. Targets use data-tour attributes so the tour is
- * decoupled from styling. Modal steps are added in a later step.
+ * Guided walkthrough. Step 1 prompts the visitor to click Sample CSV (which
+ * opens the builder); the rest highlights the parts we reimagined and why.
+ * Targets use data-tour attributes so the tour is decoupled from styling.
  */
 export const tourSteps: DriveStep[] = [
   {
+    element: '[data-tour="sample-csv"]',
     popover: {
-      title: 'Welcome to the LeadMagic concept',
+      title: 'Try it with a sample',
       description:
-        'A quick tour of what you can click and how the enrichment flow works. Hit Next, or skip anytime.',
+        "This concept reimagines LeadMagic's bulk enrichment builder. Click Sample CSV to load a sample file and open it.",
+      side: 'top',
+      align: 'center',
+      showButtons: ['close'],
     },
   },
   {
-    element: '[data-tour="sidebar"]',
+    element: '[data-tour="modal-file"]',
     popover: {
-      title: 'Navigation',
+      title: 'Your file at a glance',
       description:
-        'Move between sections here. List Enrichment is where the action is. The header toggle collapses this rail.',
-      side: 'right',
+        'We swapped the dominant spreadsheet for a compact summary: the columns we detected and how much of each is filled. Peek at the raw rows anytime with Preview rows.',
+      side: 'bottom',
       align: 'start',
     },
   },
   {
-    element: '[data-tour="command"]',
+    element: '[data-tour="modal-recipes"]',
     popover: {
-      title: 'Command palette',
+      title: 'Recipes: the new fast path',
       description:
-        'Click it (or press Cmd K) to search settings and actions from anywhere.',
+        'Brand new here. Start from a recipe in one click (your recent picks, your saved sets, or our starters), or hit Smart select for the recommended set for this file.',
       side: 'bottom',
-      align: 'end',
+      align: 'start',
     },
   },
   {
-    element: '[data-tour="dropzone"]',
+    element: '[data-tour="modal-list"]',
     popover: {
-      title: 'Upload a CSV',
+      title: 'Build and save your own',
       description:
-        'The heart of the demo: drag a CSV here, or click Sample CSV to try it instantly. That opens the enrichment builder.',
+        'Browse by outcome (emails, phone, company, and more) and search by name or tag. Then Save selection to turn any custom set into a reusable recipe.',
       side: 'top',
-      align: 'center',
+      align: 'start',
+    },
+  },
+  {
+    element: '[data-tour="modal-footer"]',
+    popover: {
+      title: 'Live estimate, then run',
+      description:
+        'The credit estimate updates as you choose. Clear all to reset, or Start enrichment when ready. That is the concept, explore freely!',
+      side: 'top',
+      align: 'end',
     },
   },
 ];

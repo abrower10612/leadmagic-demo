@@ -46,7 +46,6 @@ export function UploadDropzone() {
       role="button"
       tabIndex={0}
       aria-label="Upload a CSV"
-      data-tour="dropzone"
       onClick={() => inputRef.current?.click()}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -115,6 +114,7 @@ export function UploadDropzone() {
       <div className="relative z-10 mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
         <Button
           variant="outline"
+          data-tour="sample-csv"
           className="h-9 gap-1.5"
           onClick={(e) => {
             e.stopPropagation();

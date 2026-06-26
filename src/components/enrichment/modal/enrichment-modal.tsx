@@ -18,6 +18,7 @@ import { FileSummary } from './file-summary';
 import { RecipesRail } from './recipes-rail';
 import { EnrichmentPanel } from './enrichment-panel';
 import { useEnrichmentSelection } from './use-enrichment-selection';
+import { useTourActive } from '@/components/tour/tour-active';
 
 function formatCredits(n: number): string {
   return Number.isInteger(n)
@@ -95,7 +96,10 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
       </div>
 
       {/* Footer */}
-      <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t border-border px-6 py-3">
+      <div
+        data-tour="modal-footer"
+        className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t border-border px-6 py-3"
+      >
         <div className="flex items-center gap-1.5 text-sm">
           <Zap className="size-4 text-primary" />
           <span className="font-medium text-foreground">
@@ -142,7 +146,7 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
                 Clear all
               </Button>
             ))}
-          <Button variant="outline" onClick={onClose}>
+          <Button variant="outline" data-tour="modal-cancel" onClick={onClose}>
             Cancel
           </Button>
           <Button disabled={sel.estimate.count === 0}>Start enrichment</Button>
@@ -161,8 +165,9 @@ export function EnrichmentModal({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  const tourActive = useTourActive();
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={onOpenChange} modal={!tourActive}>
       <DialogContent
         showCloseButton={false}
         onInteractOutside={(e) => e.preventDefault()}

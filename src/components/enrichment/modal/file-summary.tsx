@@ -29,7 +29,10 @@ export function FileSummary({
   ).sort((a, b) => a[1].index - b[1].index);
 
   return (
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-border px-6 py-3">
+    <div
+      data-tour="modal-file"
+      className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-border px-6 py-3"
+    >
       <div className="flex items-center gap-1.5 text-sm text-foreground">
         <FileText className="size-4 shrink-0 text-muted-foreground" />
         <span className="font-medium">{csv.fileName}</span>

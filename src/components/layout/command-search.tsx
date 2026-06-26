@@ -66,7 +66,6 @@ export function CommandSearch() {
     <>
       <button
         type="button"
-        data-tour="command"
         onClick={() => setOpen(true)}
         className="flex h-9 w-[220px] items-center gap-2 rounded-lg border border-border bg-input/30 px-3 text-sm text-muted-foreground transition-colors hover:bg-input/50 lg:w-[300px] xl:w-[360px]"
       >

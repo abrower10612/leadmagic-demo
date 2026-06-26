@@ -80,7 +80,7 @@ function NavLink({ item }: { item: NavItem }) {
 
 export function AppSidebar() {
   return (
-    <Sidebar collapsible="offcanvas" className="border-sidebar-border" data-tour="sidebar">
+    <Sidebar collapsible="offcanvas" className="border-sidebar-border">
       {/* Brand */}
       <SidebarHeader className="h-12 flex-row items-center border-b border-sidebar-border px-1.5">
         <div className="flex min-w-0 flex-1 items-center gap-2 px-2 py-1.5">
