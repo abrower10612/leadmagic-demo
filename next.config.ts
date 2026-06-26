@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Hide the floating dev indicator so it doesn't overlap the sidebar user card.
+  devIndicators: false,
 };
 
 export default nextConfig;

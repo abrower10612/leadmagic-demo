@@ -1,20 +1,20 @@
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { AppSidebar } from './app-sidebar';
 import { AppHeader } from './app-header';
 import { SupportTab } from './support-tab';
 
 /**
- * Root layout frame: fixed sidebar + main column (header above scrollable content).
- * STUB — structure only; styled to match the screenshot in a later step.
+ * Root layout frame: collapsible sidebar + main column (sticky header above content).
  */
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen w-full">
+    <SidebarProvider>
       <AppSidebar />
-      <div className="relative flex flex-1 flex-col">
+      <SidebarInset className="bg-background">
         <AppHeader />
-        <main className="flex-1">{children}</main>
-        <SupportTab />
-      </div>
-    </div>
+        <div className="flex-1">{children}</div>
+      </SidebarInset>
+      <SupportTab />
+    </SidebarProvider>
   );
 }
