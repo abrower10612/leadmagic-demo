@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { FileText, Zap } from 'lucide-react';
+import { Zap } from 'lucide-react';
 
 import {
   Dialog,
@@ -12,7 +12,10 @@ import {
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { detectColumns, type ParsedCsv } from '@/lib/csv';
+import type { Recipe } from '@/lib/recipes';
 import { CsvPreview } from './csv-preview';
+import { FileSummary } from './file-summary';
+import { RecipesRail } from './recipes-rail';
 import { EnrichmentPanel } from './enrichment-panel';
 import { useEnrichmentSelection } from './use-enrichment-selection';
 
@@ -25,6 +28,7 @@ function formatCredits(n: number): string {
 /** Inner content — mounted fresh per file (keyed) so all state resets. */
 function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void }) {
   const [useHeader, setUseHeader] = React.useState(true);
+  const [showPreview, setShowPreview] = React.useState(false);
 
   const dataRows = useHeader ? csv.rows : [csv.headers, ...csv.rows];
   const detection = React.useMemo(
@@ -36,82 +40,78 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
   const rowCount = dataRows.length;
   const sel = useEnrichmentSelection(detection, rowCount);
 
+  const applyRecipe = (r: Recipe) => sel.applyRecipe(r.enrichmentIds);
+
   return (
     <div className="flex h-full min-h-0 flex-col">
-      {/* Header band — toggle sits over the sheet, panel title over the panel */}
-      <div className="flex shrink-0 border-b border-border">
-        <div className="flex flex-1 items-center justify-between gap-4 border-r border-border px-5 py-4">
-          <div className="min-w-0">
-            <DialogTitle className="text-xl font-semibold tracking-tight">
-              Submit new enrichment
-            </DialogTitle>
-            <DialogDescription className="sr-only">
-              Preview your CSV and choose which enrichments to run.
-            </DialogDescription>
-            <div className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground">
-              <FileText className="size-3.5 shrink-0" />
-              <span className="truncate">{csv.fileName}</span>
-            </div>
-          </div>
-          <label className="flex shrink-0 cursor-pointer items-center gap-2.5 text-sm text-muted-foreground">
-            Use first row as header
-            <Switch checked={useHeader} onCheckedChange={setUseHeader} />
-          </label>
+      {/* Header */}
+      <div className="flex shrink-0 items-center justify-between gap-4 border-b border-border px-6 py-4">
+        <div>
+          <DialogTitle className="text-xl font-semibold tracking-tight">
+            Submit new enrichment
+          </DialogTitle>
+          <DialogDescription className="sr-only">
+            Review your file and choose which enrichments to run.
+          </DialogDescription>
         </div>
-        <div className="flex w-[540px] shrink-0 items-center justify-between px-5 py-4">
-          <h2 className="text-base font-semibold text-foreground">
-            Choose enrichments
-          </h2>
-          <span className="text-xs text-muted-foreground">
-            {sel.estimate.count} selected
-          </span>
-        </div>
+        <label className="flex shrink-0 cursor-pointer items-center gap-2.5 text-sm text-muted-foreground">
+          Use first row as header
+          <Switch checked={useHeader} onCheckedChange={setUseHeader} />
+        </label>
       </div>
 
-      {/* Body: spreadsheet | enrichment panel */}
-      <div className="flex min-h-0 flex-1">
-        <div className="flex min-w-0 flex-1 flex-col border-r border-border">
+      {/* Compact file summary */}
+      <FileSummary
+        csv={csv}
+        detection={detection}
+        rowCount={rowCount}
+        showPreview={showPreview}
+        onTogglePreview={() => setShowPreview((v) => !v)}
+      />
+
+      {/* Optional full spreadsheet */}
+      {showPreview && (
+        <div className="flex max-h-[300px] shrink-0 flex-col border-b border-border">
           <CsvPreview csv={csv} useHeader={useHeader} />
         </div>
+      )}
 
-        <aside className="flex w-[540px] shrink-0 flex-col">
-          <EnrichmentPanel
-            detection={detection}
-            rowCount={rowCount}
-            selected={sel.selected}
-            onToggle={sel.toggle}
-            onToggleGroup={sel.toggleGroup}
-          />
+      {/* Recipes (hero) + the individual list */}
+      <div className="min-h-0 flex-1 overflow-auto">
+        <RecipesRail
+          selected={sel.selected}
+          onApply={applyRecipe}
+          onSmartSelect={sel.smartSelect}
+        />
+        <div className="mx-6 border-t border-border" />
+        <EnrichmentPanel
+          detection={detection}
+          rowCount={rowCount}
+          selected={sel.selected}
+          onToggle={sel.toggle}
+          onToggleGroup={sel.toggleGroup}
+        />
+      </div>
 
-          {/* Footer: estimate + actions */}
-          <div className="space-y-3 border-t border-border p-4">
-            <div className="rounded-lg border border-border bg-muted/30 p-3 text-xs">
-              <div className="flex items-center gap-1.5">
-                <Zap className="size-3.5 text-primary" />
-                <span className="font-medium text-foreground">
-                  {sel.estimate.count}{' '}
-                  {sel.estimate.count === 1 ? 'enrichment' : 'enrichments'}{' '}
-                  selected
-                </span>
-                <span className="text-muted-foreground">
-                  · up to {formatCredits(sel.estimate.credits)} credits (~$
-                  {sel.estimate.usd.toFixed(2)})
-                </span>
-              </div>
-              <div className="mt-1 text-muted-foreground">
-                Growth plan · $0.0125/credit on your account
-              </div>
-            </div>
-            <div className="flex justify-end gap-2">
-              <Button variant="outline" onClick={onClose}>
-                Cancel
-              </Button>
-              <Button disabled={sel.estimate.count === 0}>
-                Start enrichment
-              </Button>
-            </div>
-          </div>
-        </aside>
+      {/* Footer */}
+      <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t border-border px-6 py-3">
+        <div className="flex items-center gap-1.5 text-sm">
+          <Zap className="size-4 text-primary" />
+          <span className="font-medium text-foreground">
+            {sel.estimate.count}{' '}
+            {sel.estimate.count === 1 ? 'enrichment' : 'enrichments'} selected
+          </span>
+          <span className="text-muted-foreground">
+            · up to {formatCredits(sel.estimate.credits)} credits (~$
+            {sel.estimate.usd.toFixed(2)}) · Growth plan $0.0125/credit
+          </span>
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button disabled={sel.estimate.count === 0}>Start enrichment</Button>
+        </div>
       </div>
     </div>
   );

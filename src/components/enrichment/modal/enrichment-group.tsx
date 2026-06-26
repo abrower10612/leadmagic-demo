@@ -41,7 +41,7 @@ export function EnrichmentGroup({
           {allSelected ? 'Clear' : 'Select all'}
         </button>
       </header>
-      <div className="space-y-2 pt-1 pb-1">
+      <div className="grid gap-2.5 pt-1.5 pb-1 lg:grid-cols-2 2xl:grid-cols-3">
         {items.map((e) => (
           <EnrichmentRow
             key={e.id}
