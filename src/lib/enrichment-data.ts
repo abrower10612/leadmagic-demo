@@ -1,0 +1,196 @@
+// Mock data for the Enrichment history table.
+// Faithful to the values shown in the LeadMagic dashboard screenshot.
+
+export type EnrichmentStatus = 'completed' | 'processing' | 'failed' | 'queued';
+
+export interface EnrichmentRun {
+  id: string;
+  fileName: string;
+  status: EnrichmentStatus;
+  /** 0–100 */
+  progress: number;
+  rows: number;
+  succeeded: number;
+  /** null renders as an em-dash */
+  failed: number | null;
+  /** null renders as an em-dash */
+  skipped: number | null;
+  credits: number;
+  /** human-readable, e.g. "7m 2s" */
+  duration: string;
+  /** e.g. "Jun 25, 2026" */
+  created: string;
+  /** null renders as an em-dash */
+  completed: string | null;
+}
+
+export const enrichmentRuns: EnrichmentRun[] = [
+  {
+    id: 'run-01',
+    fileName: 'Kaveotech Contact Enrichment 12',
+    status: 'completed',
+    progress: 100,
+    rows: 429,
+    succeeded: 428,
+    failed: 1,
+    skipped: null,
+    credits: 795,
+    duration: '7m 2s',
+    created: 'Jun 25, 2026',
+    completed: 'Jun 25, 2026',
+  },
+  {
+    id: 'run-02',
+    fileName: 'Kaveotech Contact Enrichment 11',
+    status: 'completed',
+    progress: 100,
+    rows: 489,
+    succeeded: 489,
+    failed: null,
+    skipped: null,
+    credits: 1145,
+    duration: '1m 54s',
+    created: 'Jun 24, 2026',
+    completed: 'Jun 24, 2026',
+  },
+  {
+    id: 'run-03',
+    fileName: 'Kaveotech Contact Enrichment 10',
+    status: 'completed',
+    progress: 100,
+    rows: 176,
+    succeeded: 176,
+    failed: null,
+    skipped: null,
+    credits: 460,
+    duration: '1m 0s',
+    created: 'Jun 23, 2026',
+    completed: 'Jun 23, 2026',
+  },
+  {
+    id: 'run-04',
+    fileName: 'Kaveotech Contact Enrichment 9',
+    status: 'completed',
+    progress: 100,
+    rows: 301,
+    succeeded: 301,
+    failed: null,
+    skipped: null,
+    credits: 490,
+    duration: '1m 4s',
+    created: 'Jun 22, 2026',
+    completed: 'Jun 22, 2026',
+  },
+  {
+    id: 'run-05',
+    fileName: 'Kaveotech Contact Enrichment 8',
+    status: 'completed',
+    progress: 100,
+    rows: 291,
+    succeeded: 135,
+    failed: 156,
+    skipped: null,
+    credits: 500,
+    duration: '1m 17s',
+    created: 'Jun 22, 2026',
+    completed: 'Jun 22, 2026',
+  },
+  {
+    id: 'run-06',
+    fileName: 'Kaveotech Contact Enrichment 7',
+    status: 'completed',
+    progress: 100,
+    rows: 128,
+    succeeded: 128,
+    failed: null,
+    skipped: null,
+    credits: 260,
+    duration: '10s',
+    created: 'Jun 19, 2026',
+    completed: 'Jun 19, 2026',
+  },
+  {
+    id: 'run-07',
+    fileName: 'Kaveotech Contact Enrichment 6',
+    status: 'completed',
+    progress: 100,
+    rows: 148,
+    succeeded: 148,
+    failed: null,
+    skipped: null,
+    credits: 335,
+    duration: '11s',
+    created: 'Jun 19, 2026',
+    completed: 'Jun 19, 2026',
+  },
+  {
+    id: 'run-08',
+    fileName: 'Kaveotech Contact Enrichment 5',
+    status: 'completed',
+    progress: 100,
+    rows: 305,
+    succeeded: 305,
+    failed: null,
+    skipped: null,
+    credits: 765,
+    duration: '21s',
+    created: 'Jun 19, 2026',
+    completed: 'Jun 19, 2026',
+  },
+  {
+    id: 'run-09',
+    fileName: 'Kaveotech Contact Enrichment 4',
+    status: 'completed',
+    progress: 100,
+    rows: 212,
+    succeeded: 209,
+    failed: 3,
+    skipped: null,
+    credits: 430,
+    duration: '34s',
+    created: 'Jun 18, 2026',
+    completed: 'Jun 18, 2026',
+  },
+  {
+    id: 'run-10',
+    fileName: 'Kaveotech Contact Enrichment 3',
+    status: 'completed',
+    progress: 100,
+    rows: 540,
+    succeeded: 538,
+    failed: 2,
+    skipped: null,
+    credits: 1280,
+    duration: '2m 18s',
+    created: 'Jun 18, 2026',
+    completed: 'Jun 18, 2026',
+  },
+  {
+    id: 'run-11',
+    fileName: 'Kaveotech Contact Enrichment 2',
+    status: 'completed',
+    progress: 100,
+    rows: 96,
+    succeeded: 96,
+    failed: null,
+    skipped: null,
+    credits: 210,
+    duration: '8s',
+    created: 'Jun 17, 2026',
+    completed: 'Jun 17, 2026',
+  },
+  {
+    id: 'run-12',
+    fileName: 'Kaveotech Contact Enrichment 1',
+    status: 'completed',
+    progress: 100,
+    rows: 373,
+    succeeded: 370,
+    failed: 3,
+    skipped: null,
+    credits: 910,
+    duration: '1m 41s',
+    created: 'Jun 17, 2026',
+    completed: 'Jun 17, 2026',
+  },
+];
