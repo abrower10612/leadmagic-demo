@@ -19,6 +19,7 @@ import { RecipesRail } from './recipes-rail';
 import { EnrichmentPanel } from './enrichment-panel';
 import { useEnrichmentSelection } from './use-enrichment-selection';
 import { useTourActive } from '@/components/tour/tour-active';
+import { startRun } from '@/components/enrichment/runs-store';
 
 function formatCredits(n: number): string {
   return Number.isInteger(n)
@@ -43,6 +44,21 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
   const sel = useEnrichmentSelection(detection, rowCount);
 
   const applyRecipe = (r: Recipe) => sel.applyRecipe(r.enrichmentIds);
+
+  function handleStart() {
+    if (sel.estimate.count === 0) return;
+    startRun({
+      fileName: csv.fileName,
+      rows: rowCount,
+      credits: sel.estimate.credits,
+    });
+    onClose();
+    setTimeout(() => {
+      document
+        .getElementById('enrichment-history')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 250);
+  }
 
   return (
     <div className="flex h-full min-h-0 flex-col">
@@ -150,7 +166,7 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
           <Button variant="outline" data-tour="modal-cancel" onClick={onClose}>
             Cancel
           </Button>
-          <Button disabled={sel.estimate.count === 0}>
+          <Button disabled={sel.estimate.count === 0} onClick={handleStart}>
             <span className="sm:hidden">Start</span>
             <span className="hidden sm:inline">Start enrichment</span>
           </Button>

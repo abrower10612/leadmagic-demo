@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { enrichmentRuns } from '@/lib/enrichment-data';
 import { EnrichmentTable } from './enrichment-table';
+import { useDynamicRuns } from './runs-store';
 
 /**
  * "Enrichment history" section: header (+ Refresh), toolbar (search + Filters),
@@ -14,17 +15,24 @@ import { EnrichmentTable } from './enrichment-table';
  */
 export function EnrichmentHistory() {
   const [query, setQuery] = React.useState('');
+  const dynamic = useDynamicRuns();
+
+  const allRuns = React.useMemo(
+    () => [...dynamic, ...enrichmentRuns],
+    [dynamic]
+  );
 
   const filtered = React.useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return enrichmentRuns;
-    return enrichmentRuns.filter((run) =>
-      run.fileName.toLowerCase().includes(q)
-    );
-  }, [query]);
+    if (!q) return allRuns;
+    return allRuns.filter((run) => run.fileName.toLowerCase().includes(q));
+  }, [query, allRuns]);
 
   return (
-    <section className="rounded-xl border border-border/50 bg-card/80">
+    <section
+      id="enrichment-history"
+      className="scroll-mt-4 rounded-xl border border-border/50 bg-card/80"
+    >
       {/* Section header */}
       <div className="flex items-center justify-between gap-3 p-4 sm:p-5">
         <div>
@@ -32,7 +40,7 @@ export function EnrichmentHistory() {
             Enrichment history
           </h2>
           <p className="mt-0.5 text-xs text-muted-foreground">
-            {enrichmentRuns.length} recent runs
+            {allRuns.length} recent runs
           </p>
         </div>
         <Button variant="outline" className="h-9 shrink-0 gap-1.5">

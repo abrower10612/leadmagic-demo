@@ -12,6 +12,7 @@ import {
   Clock,
   ChevronDown,
   ExternalLink,
+  Loader2,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -72,9 +73,19 @@ function Metric({
 }
 
 function ProgressCell({ progress }: { progress: number }) {
+  const done = progress >= 100;
   return (
-    <div className="flex items-center gap-1.5 text-success">
-      <CircleCheck className="size-4" />
+    <div
+      className={cn(
+        'flex items-center gap-1.5',
+        done ? 'text-success' : 'text-info'
+      )}
+    >
+      {done ? (
+        <CircleCheck className="size-4" />
+      ) : (
+        <Loader2 className="size-4 animate-spin" />
+      )}
       <span className="tabular-nums">{progress}%</span>
     </div>
   );
