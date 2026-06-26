@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'LeadMagic',
+  title: 'LeadMagic (Concept)',
   description: 'LeadMagic Concept by Andrew Brower',
 };
 

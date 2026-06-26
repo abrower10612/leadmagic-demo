@@ -141,3 +141,24 @@
     @apply font-sans;
   }
 }
+
+/* Pulsing radar rings on the CSV dropzone. The -2rem keeps the group
+   centered on the upload icon while it breathes in and out. */
+@keyframes radar-pulse {
+  0%,
+  100% {
+    transform: translateY(-2rem) scale(0.92);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translateY(-2rem) scale(1.06);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[radar-pulse_4s_ease-in-out_infinite\] {
+    animation: none;
+    transform: translateY(-2rem);
+  }
+}

@@ -49,16 +49,16 @@ export function UploadDropzone() {
         handleFiles(e.dataTransfer.files);
       }}
       className={cn(
-        'relative flex min-h-[300px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl border px-5 py-10 text-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring sm:min-h-[330px] sm:px-6',
+        'relative flex min-h-[300px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed px-5 py-10 text-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring sm:min-h-[330px] sm:px-6',
         dragging
           ? 'border-primary bg-primary/5'
-          : 'border-border/50 bg-card/80 hover:border-border/70'
+          : 'border-border/50 bg-background hover:border-border/70'
       )}
     >
       {/* Radar rings + soft glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 flex -translate-y-8 items-center justify-center"
+        className="pointer-events-none absolute inset-0 flex animate-[radar-pulse_4s_ease-in-out_infinite] items-center justify-center"
       >
         <div className="absolute size-[11rem] rounded-full border border-border/60" />
         <div className="absolute size-[17rem] rounded-full border border-border/40" />
@@ -74,7 +74,7 @@ export function UploadDropzone() {
             className="size-12 text-muted-foreground/70"
             strokeWidth={1.25}
           />
-          <span className="absolute -right-2.5 -bottom-1 flex size-7 items-center justify-center rounded-full bg-primary ring-4 ring-card">
+          <span className="absolute -right-2.5 -bottom-1 flex size-7 items-center justify-center rounded-full bg-primary ring-4 ring-background">
             <ArrowUp className="size-4 text-primary-foreground" />
           </span>
         </div>
