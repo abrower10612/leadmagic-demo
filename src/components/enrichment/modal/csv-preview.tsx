@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils';
 import { columnLetter, type ParsedCsv } from '@/lib/csv';
 
 /**
- * Read-only spreadsheet preview of the uploaded CSV — styled to match the
+ * Read-only spreadsheet preview of the uploaded CSV - styled to match the
  * real app's editor (column letters with fx/menu affordances, header row,
  * violet footer controls). The first file row shows as row 1, styled as a
  * header when "Use first row as header" is on.

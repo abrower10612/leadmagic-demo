@@ -1,6 +1,6 @@
 'use client';
 
-import { FileText, Check, ChevronDown } from 'lucide-react';
+import { FileText, Check, ChevronDown, Eye } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import type { ColumnDetection, DetectedInfo, ParsedCsv } from '@/lib/csv';
@@ -54,12 +54,13 @@ export function FileSummary({
       <button
         type="button"
         onClick={onTogglePreview}
-        className="ml-auto flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+        className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
       >
+        <Eye className="size-3.5" />
         {showPreview ? 'Hide rows' : 'Preview rows'}
         <ChevronDown
           className={cn(
-            'size-3.5 transition-transform',
+            'size-3.5 text-primary-foreground/80 transition-transform',
             showPreview && 'rotate-180'
           )}
         />

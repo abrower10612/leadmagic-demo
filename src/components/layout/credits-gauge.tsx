@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 
 /**
- * Credit gauge — exact match to app.leadmagic.io's SVG: a ~250° arc with a
+ * Credit gauge - exact match to app.leadmagic.io's SVG: a ~250° arc with a
  * muted track, a green value sweep (~82%), a needle, and a center hub.
  */
 export function CreditsGauge({ className }: { className?: string }) {

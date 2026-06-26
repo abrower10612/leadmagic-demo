@@ -1,5 +1,5 @@
 /**
- * Vertical "Customer Support" tab pinned to the right edge — matches the real
+ * Vertical "Customer Support" tab pinned to the right edge - matches the real
  * app's feedback widget (34px thick × ~170px tall, 16px text, white on violet).
  *
  * Under writing-mode: vertical-rl, Tailwind v4's logical px/py map to swapped

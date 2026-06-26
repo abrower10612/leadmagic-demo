@@ -64,7 +64,7 @@ export function columnLetter(index: number): string {
 export interface DetectedInfo {
   header: string;
   index: number;
-  /** 0–1 share of rows with a non-empty value. */
+  /** 0-1 share of rows with a non-empty value. */
   coverage: number;
   filled: number;
 }

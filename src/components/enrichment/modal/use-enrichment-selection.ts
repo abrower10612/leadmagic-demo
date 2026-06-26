@@ -105,10 +105,14 @@ export function useEnrichmentSelection(
     setSelected(new Set(ids));
   }, []);
 
-  /** Select everything that's runnable with the detected columns. */
+  /** Select the curated recommended set that's runnable on this file. */
   const smartSelect = React.useCallback(() => {
     setSelected(
-      new Set(enrichments.filter((e) => readyMap[e.id]).map((e) => e.id))
+      new Set(
+        enrichments
+          .filter((e) => e.recommended && readyMap[e.id])
+          .map((e) => e.id)
+      )
     );
   }, [readyMap]);
 

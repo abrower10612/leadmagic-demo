@@ -1,7 +1,7 @@
 import { ExternalLink } from 'lucide-react';
 
 /**
- * "Bulk List Enrichment" card — header (title + Guide badge) + description.
+ * "Bulk List Enrichment" card - header (title + Guide badge) + description.
  * Classes mirror app.leadmagic.io exactly.
  */
 export function PageIntro() {

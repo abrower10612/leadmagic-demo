@@ -7,7 +7,7 @@ export interface EnrichmentRun {
   id: string;
   fileName: string;
   status: EnrichmentStatus;
-  /** 0–100 */
+  /** 0-100 */
   progress: number;
   rows: number;
   succeeded: number;

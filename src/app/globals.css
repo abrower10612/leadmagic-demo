@@ -52,7 +52,7 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* LeadMagic design tokens — extracted from app.leadmagic.io (Geist / Geist Mono). */
+/* LeadMagic design tokens - extracted from app.leadmagic.io (Geist / Geist Mono). */
 :root {
   --background: #ffffff;
   --foreground: #09090b;

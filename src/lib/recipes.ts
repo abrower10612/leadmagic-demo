@@ -16,7 +16,7 @@ export interface Recipe {
 }
 
 export const recipes: Recipe[] = [
-  // Recent — auto-captured
+  // Recent - auto-captured
   {
     id: 'recent-validate-work',
     name: 'Validate + Work emails',
@@ -31,7 +31,7 @@ export const recipes: Recipe[] = [
     enrichmentIds: ['add-company-details', 'tech-stacks'],
     lastUsed: 'last week',
   },
-  // Saved — user named/pinned
+  // Saved - user named/pinned
   {
     id: 'saved-outbound',
     name: 'Outbound stack',
@@ -39,7 +39,7 @@ export const recipes: Recipe[] = [
     enrichmentIds: ['find-work-emails', 'validate-emails', 'find-mobile'],
     lastUsed: 'Jun 20',
   },
-  // Starter — curated bundles
+  // Starter - curated bundles
   {
     id: 'starter-verify',
     name: 'Verify list',

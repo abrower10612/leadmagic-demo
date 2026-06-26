@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Zap } from 'lucide-react';
+import { Zap, Trash2 } from 'lucide-react';
 
 import {
   Dialog,
@@ -25,10 +25,11 @@ function formatCredits(n: number): string {
     : n.toFixed(2).replace(/\.?0+$/, '');
 }
 
-/** Inner content — mounted fresh per file (keyed) so all state resets. */
+/** Inner content - mounted fresh per file (keyed) so all state resets. */
 function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void }) {
   const [useHeader, setUseHeader] = React.useState(true);
   const [showPreview, setShowPreview] = React.useState(false);
+  const [confirmClear, setConfirmClear] = React.useState(false);
 
   const dataRows = useHeader ? csv.rows : [csv.headers, ...csv.rows];
   const detection = React.useMemo(
@@ -106,7 +107,41 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
             {sel.estimate.usd.toFixed(2)}) · Growth plan $0.0125/credit
           </span>
         </div>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
+          {sel.estimate.count > 0 &&
+            (confirmClear ? (
+              <>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  className="gap-1.5"
+                  onClick={() => {
+                    sel.clear();
+                    setConfirmClear(false);
+                  }}
+                >
+                  <Trash2 className="size-3.5" />
+                  Yes, clear all
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setConfirmClear(false)}
+                >
+                  Keep
+                </Button>
+              </>
+            ) : (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="gap-1.5 text-destructive hover:bg-destructive/10 hover:text-destructive"
+                onClick={() => setConfirmClear(true)}
+              >
+                <Trash2 className="size-3.5" />
+                Clear all
+              </Button>
+            ))}
           <Button variant="outline" onClick={onClose}>
             Cancel
           </Button>
@@ -130,6 +165,8 @@ export function EnrichmentModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton={false}
+        onInteractOutside={(e) => e.preventDefault()}
+        onEscapeKeyDown={(e) => e.preventDefault()}
         className="flex h-[84vh] max-h-[900px] w-[92vw] max-w-[1680px] flex-col gap-0 overflow-hidden bg-background p-0 sm:max-w-[1680px]"
       >
         {csv && (

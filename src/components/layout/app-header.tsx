@@ -7,7 +7,7 @@ import { CreditsGauge } from './credits-gauge';
 import { CommandSearch } from './command-search';
 
 /**
- * Top bar — sticky, translucent, blurred. Container classes mirror
+ * Top bar - sticky, translucent, blurred. Container classes mirror
  * app.leadmagic.io. Mobile (<lg): toggle + settings. Desktop (lg+):
  * toggle · credits meter · Add credits · spacer · search · API Keys.
  */

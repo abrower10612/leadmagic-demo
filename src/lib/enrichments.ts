@@ -46,6 +46,8 @@ export interface Enrichment {
   cost: number;
   unit: string;
   popular?: boolean;
+  /** Part of the curated "Smart select" starter set. */
+  recommended?: boolean;
 }
 
 export interface GroupMeta {
@@ -75,6 +77,7 @@ export const enrichments: Enrichment[] = [
     cost: 0.25,
     unit: 'validated email',
     popular: true,
+    recommended: true,
   },
   {
     id: 'find-work-emails',
@@ -86,6 +89,7 @@ export const enrichments: Enrichment[] = [
     requires: [['first_name', 'last_name', 'company_domain']],
     cost: 1,
     unit: 'work email found',
+    recommended: true,
   },
   {
     id: 'find-personal-emails',
@@ -143,6 +147,7 @@ export const enrichments: Enrichment[] = [
     requires: [['linkedin_url']],
     cost: 1,
     unit: 'enriched profile',
+    recommended: true,
   },
   // Company
   {
@@ -155,6 +160,7 @@ export const enrichments: Enrichment[] = [
     requires: [['company_domain']],
     cost: 1,
     unit: 'company enriched',
+    recommended: true,
   },
   {
     id: 'add-funding',
@@ -206,6 +212,22 @@ export const enrichments: Enrichment[] = [
 export const enrichmentById: Record<string, Enrichment> = Object.fromEntries(
   enrichments.map((e) => [e.id, e])
 );
+
+/** Extra search keywords per enrichment (synonyms, category terms). */
+export const enrichmentTags: Record<string, string[]> = {
+  'validate-emails': ['email', 'verify', 'validate', 'deliverability', 'bounce'],
+  'find-work-emails': ['email', 'work', 'business', 'b2b'],
+  'find-personal-emails': ['email', 'personal'],
+  'find-emails-from-profiles': ['email', 'linkedin', 'profile'],
+  'find-mobile': ['phone', 'mobile', 'cell', 'number', 'sms', 'dial', 'call'],
+  'find-profiles-from-emails': ['profile', 'linkedin', 'social'],
+  'enrich-linkedin': ['profile', 'linkedin', 'enrich'],
+  'add-company-details': ['company', 'firmographics', 'account', 'organization'],
+  'add-funding': ['company', 'funding', 'investment', 'finance', 'raised'],
+  'tech-stacks': ['company', 'tech', 'technology', 'stack', 'technographics', 'software'],
+  'similar-companies': ['company', 'similar', 'lookalike', 'competitor'],
+  'detect-job-changes': ['signal', 'job', 'change', 'movement', 'switch'],
+};
 
 export const COLUMN_LABEL: Record<DetectedColumn, string> = {
   email: 'email',

@@ -55,7 +55,7 @@ function Metric({
   tone?: 'default' | 'success' | 'danger';
 }) {
   if (value === null || value === 0) {
-    return <span className="text-muted-foreground">—</span>;
+    return <span className="text-muted-foreground">-</span>;
   }
   return (
     <span
@@ -149,7 +149,7 @@ export function EnrichmentTable({ runs }: { runs: EnrichmentRun[] }) {
                 {run.created}
               </TableCell>
               <TableCell className="px-3 text-muted-foreground">
-                {run.completed ?? '—'}
+                {run.completed ?? '-'}
               </TableCell>
               <TableCell className="px-3">
                 <Button

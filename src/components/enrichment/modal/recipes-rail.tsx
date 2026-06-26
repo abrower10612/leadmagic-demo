@@ -2,13 +2,14 @@
 
 import { Sparkles } from 'lucide-react';
 
-import { recipes } from '@/lib/recipes';
+import { recipes as starterRecipes } from '@/lib/recipes';
 import type { Recipe } from '@/lib/recipes';
 import { RecipeCard } from './recipe-card';
+import { useUserRecipes, removeUserRecipe } from './recipes-store';
 
 /**
- * The hero of the picker: one-click recipes (Recent / Saved / Starter) plus a
- * "Smart select" that auto-picks everything runnable on this file.
+ * The hero of the picker: one-click recipes (your saved + recent + starters)
+ * plus a "Smart select" recommended set. Saving happens in the list section.
  */
 export function RecipesRail({
   selected,
@@ -19,6 +20,9 @@ export function RecipesRail({
   onApply: (recipe: Recipe) => void;
   onSmartSelect: () => void;
 }) {
+  const userRecipes = useUserRecipes();
+  const all = [...userRecipes, ...starterRecipes];
+
   const isActive = (r: Recipe) =>
     r.enrichmentIds.length === selected.size &&
     r.enrichmentIds.every((id) => selected.has(id));
@@ -31,7 +35,7 @@ export function RecipesRail({
             Start with a recipe
           </h3>
           <p className="mt-0.5 text-xs text-muted-foreground">
-            Reuse a saved set or one of your recent selections — one click.
+            Reuse a saved set or recent selection in one click.
           </p>
         </div>
         <button
@@ -45,12 +49,17 @@ export function RecipesRail({
       </div>
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-        {recipes.map((r) => (
+        {all.map((r) => (
           <RecipeCard
             key={r.id}
             recipe={r}
             active={isActive(r)}
             onApply={onApply}
+            onDelete={
+              r.id.startsWith('user-')
+                ? () => removeUserRecipe(r.id)
+                : undefined
+            }
           />
         ))}
       </div>
