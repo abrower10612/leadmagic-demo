@@ -68,14 +68,16 @@ export function EnrichmentRow({
         <p className="text-xs text-muted-foreground">
           {e.input} → {e.output}
         </p>
-        <p className="flex flex-wrap items-center gap-1 text-xs text-muted-foreground">
-          <Link2 className="size-3 shrink-0" />
-          {e.cost} {e.cost === 1 ? 'credit' : 'credits'} per {e.unit}
-          {r.ready && rowCount > 0 && (
-            <span className="text-muted-foreground/70">
-              · {r.coveredRows}/{rowCount} rows ready
-            </span>
-          )}
+        <p className="flex items-start gap-1 text-xs text-muted-foreground">
+          <Link2 className="mt-0.5 size-3 shrink-0" />
+          <span className="break-words">
+            {e.cost} {e.cost === 1 ? 'credit' : 'credits'} per {e.unit}
+            {r.ready && rowCount > 0 && (
+              <span className="text-muted-foreground/70">
+                {' '}· {r.coveredRows}/{rowCount} rows ready
+              </span>
+            )}
+          </span>
         </p>
       </div>
     </label>
