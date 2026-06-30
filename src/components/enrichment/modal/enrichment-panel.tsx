@@ -1,14 +1,14 @@
 'use client';
 
 import * as React from 'react';
-import { Plus, Check } from 'lucide-react';
+import { Plus, Check, Search } from 'lucide-react';
 
 import { enrichments, enrichmentGroups, enrichmentTags } from '@/lib/enrichments';
 import type { ColumnDetection } from '@/lib/csv';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
 import { isReady } from './use-enrichment-selection';
-import { EnrichmentToolbar } from './enrichment-toolbar';
 import { EnrichmentGroup } from './enrichment-group';
 import { addUserRecipe } from './recipes-store';
 
@@ -69,23 +69,32 @@ export function EnrichmentPanel({
             Pick exactly what to run, then save it as a recipe to reuse.
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          {selected.size > 0 && !saving && (
-            <button
-              type="button"
-              onClick={() => setSaving(true)}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
-            >
-              <Plus className="size-3.5" />
-              Save selection
-            </button>
-          )}
-          <EnrichmentToolbar
-            query={query}
-            onQuery={setQuery}
-            readyOnly={readyOnly}
-            onReadyOnly={setReadyOnly}
-          />
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
+            {selected.size > 0 && !saving && (
+              <button
+                type="button"
+                onClick={() => setSaving(true)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
+              >
+                <Plus className="size-3.5" />
+                Save selection
+              </button>
+            )}
+            <div className="relative w-56">
+              <Search className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search enrichments…"
+                className="h-8 pl-8 text-xs"
+              />
+            </div>
+          </div>
+          <label className="flex shrink-0 cursor-pointer items-center gap-2 text-xs whitespace-nowrap text-muted-foreground">
+            Ready only
+            <Switch checked={readyOnly} onCheckedChange={setReadyOnly} />
+          </label>
         </div>
       </div>
 
