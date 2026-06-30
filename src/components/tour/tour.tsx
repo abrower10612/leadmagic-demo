@@ -113,9 +113,9 @@ export function Tour() {
     <button
       type="button"
       onClick={start}
-      className="fixed right-5 bottom-5 z-40 inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-2 text-xs font-medium text-foreground shadow-lg transition-colors hover:border-primary/40 hover:bg-muted"
+      className="fixed right-5 bottom-5 z-40 inline-flex animate-[tour-glow_2s_ease-out_infinite] items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground ring-1 ring-primary/50 transition-transform hover:scale-105"
     >
-      <Compass className="size-4 text-primary" />
+      <Compass className="size-[18px]" />
       Take a tour
     </button>
   );

@@ -163,6 +163,29 @@
   }
 }
 
+/* Attention pulse for the "Take a tour" button: a violet ring that expands
+   and fades, over a steady drop shadow. */
+@keyframes tour-glow {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(124, 58, 237, 0.5),
+      0 8px 24px rgba(0, 0, 0, 0.45);
+  }
+  70%,
+  100% {
+    box-shadow:
+      0 0 0 12px rgba(124, 58, 237, 0),
+      0 8px 24px rgba(0, 0, 0, 0.45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[tour-glow_2s_ease-out_infinite\] {
+    animation: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  }
+}
+
 /* Guided tour (driver.js) — themed to the dark/violet design system. */
 .driver-popover.lm-tour {
   background-color: #18181b;
