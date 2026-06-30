@@ -32,7 +32,7 @@ export const tourSteps: DriveStep[] = [
     popover: {
       title: 'Recipes: the new fast path',
       description:
-        'Brand new here. Start from a recipe in one click (your recent picks, your saved sets, or my starters), or hit Smart select for the recommended set for this file.',
+        'Start from a recipe in one click (your recent picks, your saved sets, or starter examples), or hit Smart select for the recommended set for this file.',
       side: 'bottom',
       align: 'start',
     },
