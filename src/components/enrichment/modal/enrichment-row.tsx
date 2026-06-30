@@ -68,7 +68,7 @@ export function EnrichmentRow({
         <p className="text-xs text-muted-foreground">
           {e.input} → {e.output}
         </p>
-        <p className="flex items-center gap-1 text-xs text-muted-foreground">
+        <p className="flex flex-wrap items-center gap-1 text-xs text-muted-foreground">
           <Link2 className="size-3 shrink-0" />
           {e.cost} {e.cost === 1 ? 'credit' : 'credits'} per {e.unit}
           {r.ready && rowCount > 0 && (
