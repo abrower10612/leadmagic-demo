@@ -117,13 +117,13 @@ function ModalContent({ csv, onClose }: { csv: ParsedCsv; onClose: () => void })
         data-tour="modal-footer"
         className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t border-border px-4 py-3 sm:px-6"
       >
-        <div className="flex items-center gap-1.5 text-sm">
-          <Zap className="size-4 text-primary" />
+        <div className="flex flex-wrap items-center gap-1.5 text-sm">
+          <Zap className="size-4 shrink-0 text-primary" />
           <span className="font-medium text-foreground">
             {sel.estimate.count}{' '}
             {sel.estimate.count === 1 ? 'enrichment' : 'enrichments'} selected
           </span>
-          <span className="text-muted-foreground">
+          <span className="break-words text-muted-foreground">
             · up to {formatCredits(sel.estimate.credits)} credits (~$
             {sel.estimate.usd.toFixed(2)}) · Growth plan $0.0125/credit
           </span>
