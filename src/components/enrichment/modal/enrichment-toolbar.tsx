@@ -17,8 +17,8 @@ export function EnrichmentToolbar({
   onReadyOnly: (v: boolean) => void;
 }) {
   return (
-    <div className="flex items-center gap-3">
-      <div className="relative w-56">
+    <div className="flex flex-wrap items-center gap-3">
+      <div className="relative w-full min-w-0 sm:w-56">
         <Search className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           value={query}
@@ -27,7 +27,7 @@ export function EnrichmentToolbar({
           className="h-8 pl-8 text-xs"
         />
       </div>
-      <label className="flex cursor-pointer items-center gap-2 text-xs whitespace-nowrap text-muted-foreground">
+      <label className="flex shrink-0 cursor-pointer items-center gap-2 text-xs whitespace-nowrap text-muted-foreground">
         Ready only
         <Switch checked={readyOnly} onCheckedChange={onReadyOnly} />
       </label>
